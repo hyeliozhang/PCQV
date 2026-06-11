@@ -1,0 +1,9 @@
+obligation,expected_safe,cases,passed,failed,status
+safe_null_three_valued_selection_pushdown,True,256,256,0,PASS
+safe_left_outer_join_guard_in_on_side,True,256,256,0,PASS
+safe_semijoin_parent_guard,True,256,256,0,PASS
+safe_union_all_branch_after_protection,True,256,256,0,PASS
+unsafe_left_outer_join_guard_in_where,False,256,144,112,PASS
+unsafe_raw_aggregation_under_bag_duplicates,False,256,224,32,PASS
+unsafe_antijoin_before_guard,False,256,224,32,PASS
+unsafe_except_before_policy,False,256,224,32,PASS

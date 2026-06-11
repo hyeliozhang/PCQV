@@ -1,0 +1,9 @@
+capsule_field,semantic_role,rewrite_family,reference_rows,field_erased_rows,symmetric_difference,policy_violating_contributors,necessary
+tenant_guard,base row visibility,row predicate pushdown / view elision,1,2,1,0,True
+purpose_guard,context-sensitive row visibility,predicate injection / plan selection,1,2,1,0,True
+region_guard,selectivity and geography visibility,region filter pushdown,1,3,2,0,True
+acl_exception,disjunctive exceptions,predicate factorization,2,1,1,0,True
+cross_alias_guard,alias-stable dependency,join reordering / semijoin reduction,1,2,1,1,True
+mask_timing,raw-value consumer tracking,mask movement / projection pushdown,2,2,4,0,True
+group_release,protected contributor multiset,aggregation pushdown / late filter,0,1,1,2,True
+deterministic_order,ORDER/LIMIT prefix identity,order-preserving rewrite,1,1,2,0,True

@@ -1,0 +1,9 @@
+rule,expected_safe,cases,accepted_certificates,rejected_certificates,counterexamples,minimal_witness_size,status,witness
+guard_pushdown_certificate,True,66,66,0,0,0,PASS,
+mask_certificate,True,66,66,0,0,0,PASS,
+group_guard_certificate,True,66,66,0,0,0,PASS,
+protected_semijoin_certificate,True,66,66,0,0,0,PASS,
+reject_filter_on_masked_value,False,66,0,66,1,3,PASS,"{""R"": [{""id"": 0, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": false, ""owner"": 7, ""email"": ""secret@x""}, {""id"": 0, ""tid"": 0, ""region"": ""NA"", ""sens"": 1, ""opted"": false, ""owner"": 7, ""email"": ""hidden@x""}], ""S"": [{""rid"": 0, ""tid"": 1, ""clearance"": 1, ""public"": 1, ""val"": 0}]}"
+reject_group_before_visibility,False,66,0,66,1,3,PASS,"{""R"": [{""id"": 0, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": false, ""owner"": 7, ""email"": ""secret@x""}, {""id"": 0, ""tid"": 0, ""region"": ""NA"", ""sens"": 1, ""opted"": false, ""owner"": 7, ""email"": ""hidden@x""}], ""S"": [{""rid"": 0, ""tid"": 1, ""clearance"": 1, ""public"": 1, ""val"": 0}]}"
+reject_left_join_where_guard,False,66,0,66,33,3,PASS,"{""R"": [{""id"": 0, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": true, ""owner"": 7, ""email"": ""a@x""}, {""id"": 1, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": true, ""owner"": 7, ""email"": ""b@x""}], ""S"": [{""rid"": 0, ""tid"": 1, ""clearance"": 1, ""public"": 1, ""val"": 0}]}"
+reject_limit_without_unique_key,False,66,0,66,1,3,PASS,"{""R"": [{""id"": 0, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": true, ""owner"": 7, ""email"": ""a@x""}, {""id"": 1, ""tid"": 1, ""region"": ""NA"", ""sens"": 1, ""opted"": true, ""owner"": 7, ""email"": ""b@x""}], ""S"": [{""rid"": 0, ""tid"": 1, ""clearance"": 1, ""public"": 1, ""val"": 0}]}"

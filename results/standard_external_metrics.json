@@ -1,0 +1,20 @@
+{
+  "standard_external_performance_rows": 180,
+  "standard_external_correctness_rows": 180,
+  "standard_external_safe_equivalent": [
+    108,
+    108
+  ],
+  "standard_external_unsafe_equivalent": [
+    0,
+    72
+  ],
+  "standard_external_unsafe_differences": 692,
+  "standard_external_median_ms": {
+    "pcqv": 2.491243,
+    "predicate_injection": 1.816788,
+    "raw_post_filter_control": 7.472711,
+    "unsafe_late_aggregate": 7.052583,
+    "view_barrier": 21.263042
+  }
+}

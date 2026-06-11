@@ -1,0 +1,91 @@
+{
+  "rules": 8,
+  "safe_rules": 4,
+  "unsafe_rules": 4,
+  "cases": 528,
+  "accepted_certificates": 264,
+  "rejected_certificates": 264,
+  "counterexamples": 36,
+  "safe_counterexamples": 0,
+  "unsafe_counterexamples": 36,
+  "all_status": "PASS",
+  "witnesses": {
+    "guard_pushdown_certificate": {
+      "expected_safe": true,
+      "counterexamples": 0,
+      "minimal_witness_size": 0,
+      "witness": "",
+      "obligations": [
+        "local_guard",
+        "tenant_guard",
+        "attribute_preservation"
+      ]
+    },
+    "mask_certificate": {
+      "expected_safe": true,
+      "counterexamples": 0,
+      "minimal_witness_size": 0,
+      "witness": "",
+      "obligations": [
+        "mask_after_visibility",
+        "no_unmasked_predicate"
+      ]
+    },
+    "group_guard_certificate": {
+      "expected_safe": true,
+      "counterexamples": 0,
+      "minimal_witness_size": 0,
+      "witness": "",
+      "obligations": [
+        "group_guard_after_protected_input",
+        "monotone_count"
+      ]
+    },
+    "protected_semijoin_certificate": {
+      "expected_safe": true,
+      "counterexamples": 0,
+      "minimal_witness_size": 0,
+      "witness": "",
+      "obligations": [
+        "right_side_visible_first",
+        "key_preservation"
+      ]
+    },
+    "reject_filter_on_masked_value": {
+      "expected_safe": false,
+      "counterexamples": 1,
+      "minimal_witness_size": 3,
+      "witness": "{\"R\": [{\"id\": 0, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": false, \"owner\": 7, \"email\": \"secret@x\"}, {\"id\": 0, \"tid\": 0, \"region\": \"NA\", \"sens\": 1, \"opted\": false, \"owner\": 7, \"email\": \"hidden@x\"}], \"S\": [{\"rid\": 0, \"tid\": 1, \"clearance\": 1, \"public\": 1, \"val\": 0}]}",
+      "obligations": [
+        "mask_predicate_rejected"
+      ]
+    },
+    "reject_group_before_visibility": {
+      "expected_safe": false,
+      "counterexamples": 1,
+      "minimal_witness_size": 3,
+      "witness": "{\"R\": [{\"id\": 0, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": false, \"owner\": 7, \"email\": \"secret@x\"}, {\"id\": 0, \"tid\": 0, \"region\": \"NA\", \"sens\": 1, \"opted\": false, \"owner\": 7, \"email\": \"hidden@x\"}], \"S\": [{\"rid\": 0, \"tid\": 1, \"clearance\": 1, \"public\": 1, \"val\": 0}]}",
+      "obligations": [
+        "aggregate_boundary_rejected"
+      ]
+    },
+    "reject_left_join_where_guard": {
+      "expected_safe": false,
+      "counterexamples": 33,
+      "minimal_witness_size": 3,
+      "witness": "{\"R\": [{\"id\": 0, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": true, \"owner\": 7, \"email\": \"a@x\"}, {\"id\": 1, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": true, \"owner\": 7, \"email\": \"b@x\"}], \"S\": [{\"rid\": 0, \"tid\": 1, \"clearance\": 1, \"public\": 1, \"val\": 0}]}",
+      "obligations": [
+        "outer_join_null_extension_rejected"
+      ]
+    },
+    "reject_limit_without_unique_key": {
+      "expected_safe": false,
+      "counterexamples": 1,
+      "minimal_witness_size": 3,
+      "witness": "{\"R\": [{\"id\": 0, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": true, \"owner\": 7, \"email\": \"a@x\"}, {\"id\": 1, \"tid\": 1, \"region\": \"NA\", \"sens\": 1, \"opted\": true, \"owner\": 7, \"email\": \"b@x\"}], \"S\": [{\"rid\": 0, \"tid\": 1, \"clearance\": 1, \"public\": 1, \"val\": 0}]}",
+      "obligations": [
+        "non_unique_order_rejected"
+      ]
+    }
+  }
+}

@@ -1,0 +1,198 @@
+[
+  {
+    "obligation": "safe_null_three_valued_selection_pushdown",
+    "expected_safe": true,
+    "cases": 256,
+    "passed": 256,
+    "failed": 0,
+    "status": "PASS",
+    "first_witness": null
+  },
+  {
+    "obligation": "safe_left_outer_join_guard_in_on_side",
+    "expected_safe": true,
+    "cases": 256,
+    "passed": 256,
+    "failed": 0,
+    "status": "PASS",
+    "first_witness": null
+  },
+  {
+    "obligation": "safe_semijoin_parent_guard",
+    "expected_safe": true,
+    "cases": 256,
+    "passed": 256,
+    "failed": 0,
+    "status": "PASS",
+    "first_witness": null
+  },
+  {
+    "obligation": "safe_union_all_branch_after_protection",
+    "expected_safe": true,
+    "cases": 256,
+    "passed": 256,
+    "failed": 0,
+    "status": "PASS",
+    "first_witness": null
+  },
+  {
+    "obligation": "unsafe_left_outer_join_guard_in_where",
+    "expected_safe": false,
+    "cases": 256,
+    "passed": 144,
+    "failed": 112,
+    "status": "PASS",
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "NA",
+          "risk": 1,
+          "email": "a@x",
+          "opted": 1,
+          "grp": "g1"
+        }
+      ],
+      "B": [],
+      "info": {
+        "reference": [
+          {
+            "aid": 1,
+            "bid": null,
+            "email": "a@x",
+            "amount": null
+          }
+        ],
+        "where_guard": []
+      }
+    }
+  },
+  {
+    "obligation": "unsafe_raw_aggregation_under_bag_duplicates",
+    "expected_safe": false,
+    "cases": 256,
+    "passed": 224,
+    "failed": 32,
+    "status": "PASS",
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "NA",
+          "risk": 1,
+          "email": "a@x",
+          "opted": 1,
+          "grp": "g1"
+        }
+      ],
+      "B": [
+        {
+          "bid": 10,
+          "tid": 1,
+          "aid": 1,
+          "amount": 10,
+          "purpose": "analytics",
+          "kind": "retail"
+        },
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 1,
+          "amount": 20,
+          "purpose": "support",
+          "kind": "retail"
+        }
+      ],
+      "info": {
+        "reference": [],
+        "raw_first": [
+          {
+            "aid": 1,
+            "n": 2,
+            "sum": 30
+          }
+        ]
+      }
+    }
+  },
+  {
+    "obligation": "unsafe_antijoin_before_guard",
+    "expected_safe": false,
+    "cases": 256,
+    "passed": 224,
+    "failed": 32,
+    "status": "PASS",
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "NA",
+          "risk": 1,
+          "email": "a@x",
+          "opted": 1,
+          "grp": "g1"
+        }
+      ],
+      "B": [
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 1,
+          "amount": 20,
+          "purpose": "support",
+          "kind": "retail"
+        }
+      ],
+      "info": {
+        "reference": [
+          {
+            "aid": 1
+          }
+        ],
+        "raw_antijoin": []
+      }
+    }
+  },
+  {
+    "obligation": "unsafe_except_before_policy",
+    "expected_safe": false,
+    "cases": 256,
+    "passed": 224,
+    "failed": 32,
+    "status": "PASS",
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "NA",
+          "risk": 1,
+          "email": "a@x",
+          "opted": 1,
+          "grp": "g1"
+        }
+      ],
+      "B": [
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 1,
+          "amount": 20,
+          "purpose": "support",
+          "kind": "retail"
+        }
+      ],
+      "info": {
+        "reference": [
+          {
+            "aid": 1
+          }
+        ],
+        "raw_except": []
+      }
+    }
+  }
+]

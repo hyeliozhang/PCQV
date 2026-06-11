@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+id_rsa*
+id_ed25519*
+
+# Local editor and OS state
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local logs and scratch outputs
+logs/
+render_check_final/
+scratch/
+tmp/
+
+# Submission-only bundles generated outside the artifact repo
+ICDE2027_submission_no_repo/
+ICDE2027_submission_no_repo.zip
+PCQV_repo_clean*/
+*.zip
+
+# LaTeX build intermediates; keep final paper/main.pdf and figure PDFs
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.toc
+
+# Large or regenerated experiment spillover
+results/tmp/
+results/scratch/
+*.sqlite-journal
+*.db-journal

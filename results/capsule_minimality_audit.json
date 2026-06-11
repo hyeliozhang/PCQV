@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "fields_tested": 8,
+  "necessary_fields": 8,
+  "total_symmetric_difference": 13,
+  "total_policy_violating_contributors": 3,
+  "csv": "results/capsule_minimality_audit.csv"
+}

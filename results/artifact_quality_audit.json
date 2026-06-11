@@ -1,0 +1,275 @@
+{
+  "missing_required_files": [],
+  "python_files": 31,
+  "python_metrics": [
+    {
+      "file": "artifact\\artifact_quality_audit.py",
+      "lines": 44,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\capsule_minimality_audit.py",
+      "lines": 163,
+      "functions": 15,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\certificate_counterexample_audit.py",
+      "lines": 234,
+      "functions": 19,
+      "classes": 1,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\clean_submission_audit.py",
+      "lines": 126,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\code_quality_audit.py",
+      "lines": 65,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\efficiency_scalability_audit.py",
+      "lines": 134,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\exhaustive_semantics_checker.py",
+      "lines": 203,
+      "functions": 23,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\expert_panel_audit.py",
+      "lines": 242,
+      "functions": 8,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\figure_visual_audit.py",
+      "lines": 185,
+      "functions": 6,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\format_claim_gate_audit.py",
+      "lines": 244,
+      "functions": 10,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\make_figures.py",
+      "lines": 319,
+      "functions": 18,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\manuscript_consistency_audit.py",
+      "lines": 223,
+      "functions": 5,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\memo_integration_audit.py",
+      "lines": 238,
+      "functions": 6,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\multiseed_semantic_regression.py",
+      "lines": 77,
+      "functions": 1,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\optimizer_search_audit.py",
+      "lines": 177,
+      "functions": 10,
+      "classes": 2,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\portable_sql_plan_audit.py",
+      "lines": 95,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\proof_carrying_rewrite_suite.py",
+      "lines": 205,
+      "functions": 3,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\randomized_semantic_fuzzer.py",
+      "lines": 192,
+      "functions": 4,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\reviewer_round_audit.py",
+      "lines": 194,
+      "functions": 6,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\review_readiness_audit.py",
+      "lines": 129,
+      "functions": 4,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\run_all_repro.py",
+      "lines": 30,
+      "functions": 1,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\run_joblike_benchmarks.py",
+      "lines": 260,
+      "functions": 10,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\run_remaining.py",
+      "lines": 15,
+      "functions": 0,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\run_standard_benchmarks.py",
+      "lines": 303,
+      "functions": 9,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\sql_feature_semantics_checker.py",
+      "lines": 207,
+      "functions": 26,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\static_submission_audit.py",
+      "lines": 44,
+      "functions": 0,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\statistical_confidence_audit.py",
+      "lines": 80,
+      "functions": 2,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\submission_integrity_audit.py",
+      "lines": 163,
+      "functions": 1,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\verify_final_claims.py",
+      "lines": 153,
+      "functions": 3,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\pcqv\\engine.py",
+      "lines": 1804,
+      "functions": 75,
+      "classes": 9,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\tests\\test_core_invariants.py",
+      "lines": 112,
+      "functions": 8,
+      "classes": 1,
+      "todos": 0,
+      "pass_nodes": 0
+    }
+  ],
+  "body_implementation_leaks": {
+    "artifact/": 0,
+    "results/": 0,
+    "\\.py\\b": 0,
+    "\\.csv\\b": 0,
+    "\\.json\\b": 0,
+    "README": 0,
+    "EVIDENCE": 0,
+    "STATUS": 0
+  },
+  "format_hacks": {
+    "\\\\vspace\\s*\\{\\s*-": 0,
+    "\\\\hspace\\s*\\{\\s*-": 0,
+    "\\\\fontsize": 0,
+    "\\\\setlength\\s*\\{\\\\textfloatsep": 0,
+    "\\\\addtolength": 0,
+    "\\\\enlargethispage": 0,
+    "\\\\resizebox": 0
+  },
+  "bib_entries": 81,
+  "status": "PASS"
+}

@@ -1,0 +1,2127 @@
+[
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "reference",
+    "safe_by_rule": true,
+    "rule_reason": "protected-view reference semantics",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/reference",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 390,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "post_join_filter",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/post_join_filter",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 781,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "view_barrier",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/view_barrier",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 429,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "predicate_injection",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/predicate_injection",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 296,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "pcqv_forced",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/pcqv_forced",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "pcqv",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/pcqv",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "oracle_order",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/oracle_order",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "reference",
+    "safe_by_rule": true,
+    "rule_reason": "protected-view reference semantics",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/reference",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 437,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "post_join_filter",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/post_join_filter",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 828,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "view_barrier",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/view_barrier",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 476,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "predicate_injection",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/predicate_injection",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 343,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "pcqv_forced",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/pcqv_forced",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 355,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "pcqv",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/pcqv",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 355,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "support",
+    "method": "oracle_order",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/support/oracle_order",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 355,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "reference",
+    "safe_by_rule": true,
+    "rule_reason": "protected-view reference semantics",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/reference",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 390,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "post_join_filter",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/post_join_filter",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 781,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "view_barrier",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/view_barrier",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 429,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "predicate_injection",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/predicate_injection",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 296,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "pcqv_forced",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/pcqv_forced",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "pcqv",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/pcqv",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "billing",
+    "method": "oracle_order",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/billing/oracle_order",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "c",
+      "o",
+      "l"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 308,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.1,
+    "purpose": "analytics",
+    "method": "reference",
+    "safe_by_rule": true,
+    "rule_reason": "protected-view reference semantics",
+    "memo_group_key": "q1_customer_orders/c1/s0.1/analytics/reference",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 1200.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 115.0,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 48.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.646,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 408,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.1,
+    "purpose": "analytics",
+    "method": "post_join_filter",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.1/analytics/post_join_filter",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 1200.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 115.0,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 48.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.646,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 799,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.1,
+    "purpose": "analytics",
+    "method": "view_barrier",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.1/analytics/view_barrier",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 1200.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 115.0,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 48.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.646,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 447,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  },
+  {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.1,
+    "purpose": "analytics",
+    "method": "predicate_injection",
+    "safe_by_rule": true,
+    "rule_reason": "candidate encodes the protected-view normal form under the rule side conditions",
+    "memo_group_key": "q1_customer_orders/c1/s0.1/analytics/predicate_injection",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 1200.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 115.0,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 48.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.646,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 314,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  }
+]

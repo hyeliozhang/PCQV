@@ -1,0 +1,62 @@
+{
+  "num_performance_rows": 4320,
+  "num_correctness_rows": 1152,
+  "num_ablation_rows": 1008,
+  "num_planning_overhead_rows": 1536,
+  "num_cardinality_rows": 1230,
+  "methods": [
+    "no_policy",
+    "oblivious_forced",
+    "oracle_order",
+    "pcqv",
+    "pcqv_forced",
+    "pcqv_no_stats",
+    "post_join_filter",
+    "predicate_injection",
+    "view_barrier"
+  ],
+  "performance_median_ms": {
+    "no_policy": 3.5581,
+    "oblivious_forced": 0.6881,
+    "oracle_order": 0.4204,
+    "pcqv": 0.4128,
+    "pcqv_forced": 0.4136,
+    "pcqv_no_stats": 0.378,
+    "post_join_filter": 0.7136,
+    "predicate_injection": 0.4283,
+    "view_barrier": 1.4391
+  },
+  "performance_p95_ms": {
+    "no_policy": 21.5691,
+    "oblivious_forced": 7.2847,
+    "oracle_order": 5.6918,
+    "pcqv": 6.369,
+    "pcqv_forced": 6.3168,
+    "pcqv_no_stats": 6.1102,
+    "post_join_filter": 6.2683,
+    "predicate_injection": 6.1522,
+    "view_barrier": 15.2337
+  },
+  "safe_equivalent": [
+    1064,
+    1064
+  ],
+  "negative_equivalent": [
+    40,
+    128
+  ],
+  "unsafe_aggregate_equivalent": [
+    0,
+    48
+  ],
+  "negative_policy_violations": 3816,
+  "pcqv_speedup_vs_view_barrier_median": 2.74,
+  "pcqv_speedup_vs_post_filter_median": 1.308,
+  "pcqv_speedup_vs_oblivious_median": 1.416,
+  "pcqv_vs_predicate_injection_ratio_median": 1.025,
+  "pcqv_vs_oracle_order_ratio_median": 1.037,
+  "pcqv_median_compile_ms": 0.157284,
+  "oracle_median_compile_ms": 2.291413,
+  "policy_cardinality_qerror_median": 1.139,
+  "policy_cardinality_qerror_p95": 3.5
+}

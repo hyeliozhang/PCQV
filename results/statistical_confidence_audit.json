@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "records": 12,
+  "main_pcqv_vs_view_barrier_ci": {
+    "suite": "main",
+    "claim": "pcqv_vs_view_barrier",
+    "median": 2.74007208122565,
+    "ci_low": 2.3698451672924565,
+    "ci_high": 3.026540701477324,
+    "pairs": 480
+  },
+  "joblike_pcqv_vs_view_barrier_ci": {
+    "suite": "joblike",
+    "claim": "pcqv_job_vs_view_barrier",
+    "median": 2.7528671550499944,
+    "ci_low": 2.478634801174505,
+    "ci_high": 7.6514426364009305,
+    "pairs": 24
+  },
+  "pcqv_compile_ms_ci": {
+    "suite": "planning",
+    "claim": "pcqv_compile_ms",
+    "median": 0.15728399999999998,
+    "ci_low": 0.1350835,
+    "ci_high": 0.218618,
+    "pairs": 192
+  },
+  "csv": "results/statistical_confidence_audit.csv"
+}

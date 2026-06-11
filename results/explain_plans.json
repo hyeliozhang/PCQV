@@ -1,0 +1,2414 @@
+[
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM lineitem l JOIN orders o JOIN customers c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_o AS MATERIALIZED (SELECT * FROM orders o WHERE o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))), p_c AS MATERIALIZED (SELECT * FROM customers c WHERE c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM p_l l JOIN p_o o JOIN p_c c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM lineitem l CROSS JOIN orders o CROSS JOIN customers c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 610.2,
+      "estimated_best_cost": 315.133,
+      "estimated_native_proxy_cost": 549.18,
+      "estimated_gap": 1.743,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "c",
+        "l",
+        "o"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM customers c CROSS JOIN lineitem l CROSS JOIN orders o WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM lineitem l JOIN products p JOIN orders o JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_p AS MATERIALIZED (SELECT * FROM products p WHERE p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1), p_o AS MATERIALIZED (SELECT * FROM orders o WHERE o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))), p_c AS MATERIALIZED (SELECT * FROM customers c WHERE c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM p_l l JOIN p_p p JOIN p_o o JOIN p_c c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM lineitem l CROSS JOIN products p CROSS JOIN orders o CROSS JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM products p CROSS JOIN lineitem l CROSS JOIN orders o CROSS JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM products p CROSS JOIN lineitem l CROSS JOIN orders o CROSS JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 494.507,
+      "estimated_best_cost": 257.537,
+      "estimated_native_proxy_cost": 445.056,
+      "estimated_gap": 1.728,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 211.2,
+        "p": 2.047,
+        "o": 5.0,
+        "c": 3.57
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 209,
+        "p": 1,
+        "o": 0,
+        "c": 0
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "p",
+        "l",
+        "c"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM orders o CROSS JOIN products p CROSS JOIN lineitem l CROSS JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) AND (o.tid IN (1) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA'))) AND (c.tid IN (1) AND c.risk <= 3 AND (c.region IN ('NA') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM lineitem l JOIN products p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_p AS MATERIALIZED (SELECT * FROM products p WHERE p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM p_l l JOIN p_p p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM lineitem l CROSS JOIN products p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.025,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 602.241,
+      "estimated_best_cost": 305.266,
+      "estimated_native_proxy_cost": 542.017,
+      "estimated_gap": 1.776,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 264.0,
+        "p": 1.886
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 263,
+        "p": 1
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1) AND p.active = 1 AND p.sensitivity <= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM lineitem l JOIN orders o JOIN customers c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_o AS MATERIALIZED (SELECT * FROM orders o WHERE o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))), p_c AS MATERIALIZED (SELECT * FROM customers c WHERE c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM p_l l JOIN p_o o JOIN p_c c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM lineitem l CROSS JOIN orders o CROSS JOIN customers c WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q4_revenue_by_region",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "greedy_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_original_cost": 6374.756,
+      "estimated_best_cost": 3437.653,
+      "estimated_native_proxy_cost": 5737.28,
+      "estimated_gap": 1.669,
+      "num_left_deep_orders": 6,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT c.region AS region, COUNT(DISTINCT o.oid) AS orders, SUM(l.qty*l.price) AS revenue FROM orders o CROSS JOIN customers c CROSS JOIN lineitem l WHERE (l.oid = o.oid) AND (o.cid = c.cid) AND (o.created_day BETWEEN 1 AND 365) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY c.region HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM lineitem l JOIN products p JOIN orders o JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_p AS MATERIALIZED (SELECT * FROM products p WHERE p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2), p_o AS MATERIALIZED (SELECT * FROM orders o WHERE o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))), p_c AS MATERIALIZED (SELECT * FROM customers c WHERE c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM p_l l JOIN p_p p JOIN p_o o JOIN p_c c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM lineitem l CROSS JOIN products p CROSS JOIN orders o CROSS JOIN customers c WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l CROSS JOIN products p WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM customers c CROSS JOIN orders o CROSS JOIN lineitem l CROSS JOIN products p WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q6_lineitem_product_count",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p",
+        "o",
+        "c"
+      ],
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l",
+        "p"
+      ],
+      "greedy_order": [
+        "p",
+        "l",
+        "o",
+        "c"
+      ],
+      "estimated_original_cost": 5369.274,
+      "estimated_best_cost": 2873.69,
+      "estimated_native_proxy_cost": 4832.346,
+      "estimated_gap": 1.682,
+      "num_left_deep_orders": 24,
+      "estimated_base_cards": {
+        "l": 2112.0,
+        "p": 30.705,
+        "o": 148.5,
+        "c": 112.2
+      },
+      "estimated_plain_cards": {
+        "l": 9600.0,
+        "p": 267.0,
+        "o": 5000.0,
+        "c": 1200.0
+      },
+      "actual_base_cards": {
+        "l": 2243,
+        "p": 48,
+        "o": 152,
+        "c": 159
+      },
+      "actual_plain_cards": {
+        "l": 9586,
+        "p": 267,
+        "o": 5000,
+        "c": 1200
+      },
+      "oracle_order": [
+        "o",
+        "c",
+        "l",
+        "p"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300,
+        "o": 5000,
+        "c": 1200
+      }
+    },
+    "sql": "SELECT p.category AS category, COUNT(*) AS n, SUM(l.price) AS sum_price FROM orders o CROSS JOIN customers c CROSS JOIN lineitem l CROSS JOIN products p WHERE (l.pid = p.pid) AND (l.oid = o.oid) AND (o.cid = c.cid) AND (l.qty >= 2) AND (p.category <> 'C9') AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) AND (o.tid IN (1,2,3,4,5,6,7,8,9,10) AND o.status <> 'internal' AND o.purpose_tag = 'analytics' AND EXISTS (SELECT 1 FROM customers pc WHERE pc.cid = o.cid AND pc.tid = o.tid AND pc.region IN ('NA','EU','APAC','LATAM'))) AND (c.tid IN (1,2,3,4,5,6,7,8,9,10) AND c.risk <= 3 AND (c.region IN ('NA','EU','APAC','LATAM') OR EXISTS (SELECT 1 FROM customer_acl ca WHERE ca.uid = 17 AND ca.cid = c.cid))) GROUP BY p.category HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "predicate_injection",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM lineitem l JOIN products p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "view_barrier",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "WITH p_l AS MATERIALIZED (SELECT * FROM lineitem l WHERE l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')), p_p AS MATERIALIZED (SELECT * FROM products p WHERE p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM p_l l JOIN p_p p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "oblivious_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM lineitem l CROSS JOIN products p WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "pcqv_forced",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "pcqv",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  },
+  {
+    "selectivity": 0.25,
+    "complexity": 6,
+    "query": "q8_sensitive_product_scan",
+    "method": "oracle_order",
+    "choice": {
+      "mode": "forced",
+      "template_order": [
+        "l",
+        "p"
+      ],
+      "policy_aware_order": [
+        "p",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "p",
+        "l"
+      ],
+      "greedy_order": [
+        "p",
+        "l"
+      ],
+      "estimated_original_cost": 6296.355,
+      "estimated_best_cost": 3337.288,
+      "estimated_native_proxy_cost": 5666.72,
+      "estimated_gap": 1.698,
+      "num_left_deep_orders": 2,
+      "estimated_base_cards": {
+        "l": 2640.0,
+        "p": 28.29
+      },
+      "estimated_plain_cards": {
+        "l": 12000.0,
+        "p": 246.0
+      },
+      "actual_base_cards": {
+        "l": 2770,
+        "p": 51
+      },
+      "actual_plain_cards": {
+        "l": 12000,
+        "p": 283
+      },
+      "oracle_order": [
+        "p",
+        "l"
+      ],
+      "base_rows": {
+        "l": 12000,
+        "p": 300
+      }
+    },
+    "sql": "SELECT p.category AS category, p.sensitivity AS sensitivity, COUNT(*) AS n FROM products p CROSS JOIN lineitem l WHERE (l.pid = p.pid) AND (p.sensitivity >= 1) AND (l.tid IN (1,2,3,4,5,6,7,8,9,10) AND EXISTS (SELECT 1 FROM orders po WHERE po.oid = l.oid AND po.tid = l.tid AND po.status <> 'internal')) AND (p.tid IN (1,2,3,4,5,6,7,8,9,10) AND p.active = 1 AND p.sensitivity <= 2) GROUP BY p.category, p.sensitivity HAVING COUNT(*) >= 8",
+    "explain_query_plan": [],
+    "error": "cannot convert dictionary update sequence element #0 to a sequence"
+  }
+]

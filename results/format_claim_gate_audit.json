@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "problem_count": 0,
+  "problems": [],
+  "details": {
+    "pdf_pages": 14,
+    "page12_fill": {
+      "left_blank_inches": 1.017,
+      "right_blank_inches": 1.242,
+      "overall_blank_inches": 1.017,
+      "width_px": 1020,
+      "height_px": 1320,
+      "dpi": 120
+    },
+    "body_section_count": 8,
+    "body_subsection_count": 13,
+    "figure_includes": [
+      "figures/fig_performance_suite.pdf"
+    ],
+    "cited_references": 81,
+    "bib_entries": 81,
+    "has_type3_fonts": false,
+    "font_types": [
+      "TrueType",
+      "Type 1"
+    ]
+  }
+}

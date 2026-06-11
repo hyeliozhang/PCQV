@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "problem_count": 0,
+  "problems": [],
+  "details": {
+    "figure_includes": [
+      "fig_performance_suite.pdf"
+    ],
+    "ai_acknowledgement": "AI was used only for language and grammar polishing.",
+    "figures": {
+      "fig_performance_suite.pdf": {
+        "pdfinfo": {
+          "pages": 1,
+          "width_pt": 507.6,
+          "height_pt": 300.96,
+          "file_size_bytes": 67541
+        },
+        "png_size": [
+          2961,
+          1755
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+method,n,median_ms,p95_ms,max_ms
+pcqv,36,2.491243,12.273163,14.543144
+predicate_injection,36,1.816788,9.334558,16.970714
+raw_post_filter_control,36,7.472711,30.728094,34.678856
+unsafe_late_aggregate,36,7.052583,31.448316,36.994429
+view_barrier,36,21.263042,524.393178,2113.219047

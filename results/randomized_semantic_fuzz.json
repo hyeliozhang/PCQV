@@ -1,0 +1,219 @@
+{
+  "random_templates": 240,
+  "rows": 3600,
+  "safe_rows": 1440,
+  "safe_equivalent": [
+    1440,
+    1440
+  ],
+  "unsafe_rows": 2160,
+  "unsafe_non_equivalent": [
+    683,
+    2160
+  ],
+  "unsafe_differences": 60445,
+  "unsafe_violations": 39485,
+  "errors": 0,
+  "first_failures": [
+    {
+      "case": 1,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 268,
+      "violation": 191
+    },
+    {
+      "case": 2,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 195,
+      "violation": 192
+    },
+    {
+      "case": 3,
+      "method": "unsafe_late_aggregate",
+      "safe": false,
+      "reason": "aggregate is evaluated before row policies",
+      "diff": 70,
+      "violation": 40
+    },
+    {
+      "case": 3,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 60,
+      "violation": 30
+    },
+    {
+      "case": 3,
+      "method": "mut_drop_purpose",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 60,
+      "violation": 30
+    },
+    {
+      "case": 3,
+      "method": "mut_drop_clearance",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 12,
+      "violation": 6
+    },
+    {
+      "case": 3,
+      "method": "mut_drop_region",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 10,
+      "violation": 10
+    },
+    {
+      "case": 4,
+      "method": "unsafe_late_aggregate",
+      "safe": false,
+      "reason": "aggregate is evaluated before row policies",
+      "diff": 14,
+      "violation": 8
+    },
+    {
+      "case": 4,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 12,
+      "violation": 6
+    },
+    {
+      "case": 4,
+      "method": "mut_drop_clearance",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 10,
+      "violation": 5
+    },
+    {
+      "case": 4,
+      "method": "mut_drop_region",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 2,
+      "violation": 2
+    },
+    {
+      "case": 5,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 306,
+      "violation": 178
+    },
+    {
+      "case": 5,
+      "method": "mut_drop_purpose",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 41,
+      "violation": 41
+    },
+    {
+      "case": 6,
+      "method": "unsafe_late_aggregate",
+      "safe": false,
+      "reason": "aggregate is evaluated before row policies",
+      "diff": 38,
+      "violation": 32
+    },
+    {
+      "case": 6,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 22,
+      "violation": 16
+    },
+    {
+      "case": 6,
+      "method": "mut_drop_purpose",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 16,
+      "violation": 11
+    },
+    {
+      "case": 6,
+      "method": "mut_drop_clearance",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 2,
+      "violation": 2
+    },
+    {
+      "case": 6,
+      "method": "mut_drop_acl",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 4,
+      "violation": 4
+    },
+    {
+      "case": 6,
+      "method": "mut_no_group_guard",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 13,
+      "violation": 13
+    },
+    {
+      "case": 7,
+      "method": "mut_no_mask",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 400,
+      "violation": 200
+    },
+    {
+      "case": 7,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 226,
+      "violation": 113
+    },
+    {
+      "case": 7,
+      "method": "mut_drop_purpose",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 316,
+      "violation": 158
+    },
+    {
+      "case": 7,
+      "method": "mut_drop_clearance",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 30,
+      "violation": 15
+    },
+    {
+      "case": 7,
+      "method": "mut_drop_region",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 110,
+      "violation": 55
+    },
+    {
+      "case": 8,
+      "method": "mut_drop_tenant",
+      "safe": false,
+      "reason": "mutation deletes one policy obligation for checker sensitivity",
+      "diff": 44,
+      "violation": 44
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "cases": 150,
+  "exact_cases": 150,
+  "max_aliases": 8,
+  "max_exact_orders": 40320,
+  "median_greedy_regret": 1.0,
+  "p95_greedy_regret": 1.1571,
+  "max_greedy_regret": 4.9578,
+  "num_cases_where_greedy_suboptimal": 74,
+  "seed": 20270605
+}

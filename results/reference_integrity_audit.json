@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "bib_entries": 81,
+  "cited_unique": 81,
+  "missing": [],
+  "unused": [],
+  "field_missing": [],
+  "venue_missing": [],
+  "placeholder_count": 0,
+  "coverage_categories": [
+    "database foundations",
+    "query optimization",
+    "view rewriting",
+    "cardinality estimation",
+    "fine-grained access control",
+    "privacy/purpose policies",
+    "provenance",
+    "query equivalence",
+    "database testing",
+    "benchmarks and systems"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "problem_count": 0,
+  "problems": [],
+  "memo_candidate_records": 6048,
+  "alias_property_records": 15498,
+  "cross_dependency_records": 2772,
+  "release_guard_records": 693,
+  "mask_obligation_records": 3024,
+  "pcqv_choice_records": 864,
+  "profiles_checked": [
+    "Cascades memo property sketch",
+    "PostgreSQL planner-hook property sketch",
+    "DuckDB extension optimizer-property sketch"
+  ],
+  "claim_boundary": "executable optimizer-property bridge, not production DBMS integration",
+  "sample_record": {
+    "query": "q1_customer_orders",
+    "complexity": 1,
+    "selectivity": 0.025,
+    "purpose": "analytics",
+    "method": "reference",
+    "safe_by_rule": true,
+    "rule_reason": "protected-view reference semantics",
+    "memo_group_key": "q1_customer_orders/c1/s0.025/analytics/reference",
+    "alias_properties": [
+      {
+        "alias": "l",
+        "table": "lineitem",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 300.0,
+        "plain_cardinality_estimate": 12000.0
+      },
+      {
+        "alias": "o",
+        "table": "orders",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 28.75,
+        "plain_cardinality_estimate": 1150.0
+      },
+      {
+        "alias": "c",
+        "table": "customers",
+        "local_guard_labels": [
+          "tenant"
+        ],
+        "cross_dependency_labels": [],
+        "mask_obligations": [
+          "email"
+        ],
+        "release_guard": false,
+        "deterministic_prefix_required": true,
+        "protected_cardinality_estimate": 12.0,
+        "plain_cardinality_estimate": 480.0
+      }
+    ],
+    "candidate_order": [
+      "l",
+      "o",
+      "c"
+    ],
+    "certificate_obligations": [
+      "alias-local-policy-predicates-visible",
+      "base-row-guards-attached",
+      "deterministic-prefix-preserved",
+      "join-guards-preserved",
+      "mask-observable-only-after-safe-operators"
+    ],
+    "cost_properties": {
+      "policy_aware_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "policy_oblivious_order": [
+        "c",
+        "o",
+        "l"
+      ],
+      "estimated_gap": 1.632,
+      "num_left_deep_orders": 6
+    },
+    "sql_length": 390,
+    "portable_sql_profile": "single-statement-readonly-sql92-core-plus-cte"
+  }
+}

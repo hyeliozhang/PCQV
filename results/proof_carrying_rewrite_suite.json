@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "safe_certificates_accepted": 1064,
+  "safe_certificates_total": 1064,
+  "unsafe_candidates_rejected": 424,
+  "certificate_rows": 1488,
+  "distinct_obligations_covered": 28,
+  "mandatory_obligations_covered": 18,
+  "mandatory_obligations_total": 18,
+  "missing_mandatory_obligations": [],
+  "top_obligations": [
+    [
+      "alias_binding",
+      1064
+    ],
+    [
+      "policy_selectivity_visible",
+      1064
+    ],
+    [
+      "row_guard_attached",
+      1064
+    ],
+    [
+      "tenant_context_preserved",
+      1064
+    ],
+    [
+      "group_after_visibility",
+      384
+    ],
+    [
+      "clearance_guard",
+      256
+    ],
+    [
+      "purpose_guard",
+      200
+    ],
+    [
+      "aggregate_contributor_set",
+      192
+    ],
+    [
+      "owner_or_acl_exception",
+      144
+    ],
+    [
+      "reference_equivalence",
+      128
+    ],
+    [
+      "protected_view_normal_form",
+      128
+    ],
+    [
+      "forced_order_keeps_guards",
+      128
+    ]
+  ],
+  "queries": {
+    "q10_acl_customer_rows": {
+      "accepted": 72,
+      "rejected": 48
+    },
+    "q11_order_ticket_bridge": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q12_product_segment_revenue": {
+      "accepted": 64,
+      "rejected": 56
+    },
+    "q13_order_lineitem_rows": {
+      "accepted": 72,
+      "rejected": 0
+    },
+    "q14_support_owner_rows": {
+      "accepted": 72,
+      "rejected": 0
+    },
+    "q15_clearance_product_rows": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q16_region_product_mix": {
+      "accepted": 64,
+      "rejected": 56
+    },
+    "q1_customer_orders": {
+      "accepted": 72,
+      "rejected": 48
+    },
+    "q2_revenue_by_product": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q3_support_tickets": {
+      "accepted": 72,
+      "rejected": 48
+    },
+    "q4_revenue_by_region": {
+      "accepted": 64,
+      "rejected": 56
+    },
+    "q5_high_value_segments": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q6_lineitem_product_count": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q7_customer_summary": {
+      "accepted": 64,
+      "rejected": 56
+    },
+    "q8_sensitive_product_scan": {
+      "accepted": 64,
+      "rejected": 8
+    },
+    "q9_ticket_topic_segments": {
+      "accepted": 64,
+      "rejected": 8
+    }
+  },
+  "methods": {
+    "mut_drop_acl": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_drop_clearance": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_drop_cross_guard": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_drop_purpose": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_drop_region": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_drop_tenant": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_no_group_guard": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "mut_no_mask": {
+      "accepted": 0,
+      "rejected": 42
+    },
+    "oblivious_forced": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "oracle_order": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "pcqv": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "pcqv_forced": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "pcqv_no_stats": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "post_join_filter": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "predicate_injection": {
+      "accepted": 128,
+      "rejected": 0
+    },
+    "unsafe_late_aggregate": {
+      "accepted": 40,
+      "rejected": 88
+    },
+    "view_barrier": {
+      "accepted": 128,
+      "rejected": 0
+    }
+  },
+  "csv": "results/proof_carrying_rewrite_suite.csv"
+}

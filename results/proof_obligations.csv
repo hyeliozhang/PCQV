@@ -1,0 +1,6 @@
+obligation,models_checked,passed,comment
+local selection and row-policy commutation,16,1,sigma_phi(sigma_rho(R)) = sigma_rho(sigma_phi(R)) for conjunctive tuple predicates
+alias-stable guarded inner-join reorder,4096,1,guards travel with aliases across join orders
+mask delay past unrelated selection,16,1,safe only when predicate/group/join does not inspect masked attribute
+negative: aggregation does not commute with row policy,1,1,counterexample retained intentionally
+negative: mask-before-group can change bag results,1,1,counterexample retained intentionally

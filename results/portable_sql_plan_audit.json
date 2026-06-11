@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "generated_safe_sql": 6048,
+  "failures": 0,
+  "plan_nodes": 37591,
+  "index_plans": 6042,
+  "scan_plans": 940,
+  "cte_or_subquery_plans": 3168,
+  "failure_examples": []
+}

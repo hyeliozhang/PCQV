@@ -1,0 +1,300 @@
+[
+  {
+    "obligation": "safe_selection_pushdown_over_guarded_relation",
+    "expected_safe": true,
+    "cases": 512,
+    "passed": 512,
+    "failed": 0,
+    "first_witness": null,
+    "status": "PASS"
+  },
+  {
+    "obligation": "safe_guarded_join_commutation",
+    "expected_safe": true,
+    "cases": 512,
+    "passed": 512,
+    "failed": 0,
+    "first_witness": null,
+    "status": "PASS"
+  },
+  {
+    "obligation": "safe_cross_guard_as_semijoin",
+    "expected_safe": true,
+    "cases": 512,
+    "passed": 512,
+    "failed": 0,
+    "first_witness": null,
+    "status": "PASS"
+  },
+  {
+    "obligation": "safe_inner_join_association_after_guards",
+    "expected_safe": true,
+    "cases": 512,
+    "passed": 512,
+    "failed": 0,
+    "first_witness": null,
+    "status": "PASS"
+  },
+  {
+    "obligation": "unsafe_mask_predicate_movement",
+    "expected_safe": false,
+    "cases": 512,
+    "passed": 384,
+    "failed": 128,
+    "first_witness": {
+      "A": [
+        {
+          "aid": 2,
+          "tid": 1,
+          "region": "EU",
+          "email": "b@x",
+          "opted": 0,
+          "risk": 2,
+          "grp": "g1",
+          "val": 20
+        }
+      ],
+      "B": [
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 2,
+          "amount": 220,
+          "purpose": "analytics"
+        }
+      ],
+      "C": [],
+      "info": {
+        "reference": [],
+        "moved": [
+          {
+            "aid": 2,
+            "bid": 11,
+            "amount": 220,
+            "email": "MASKED",
+            "grp": "g1"
+          }
+        ]
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "obligation": "unsafe_aggregation_before_row_guards",
+    "expected_safe": false,
+    "cases": 512,
+    "passed": 432,
+    "failed": 80,
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "APAC",
+          "email": "a@x",
+          "opted": 1,
+          "risk": 1,
+          "grp": "g1",
+          "val": 10
+        },
+        {
+          "aid": 2,
+          "tid": 1,
+          "region": "EU",
+          "email": "b@x",
+          "opted": 0,
+          "risk": 2,
+          "grp": "g1",
+          "val": 20
+        }
+      ],
+      "B": [
+        {
+          "bid": 10,
+          "tid": 1,
+          "aid": 1,
+          "amount": 120,
+          "purpose": "analytics"
+        },
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 2,
+          "amount": 220,
+          "purpose": "analytics"
+        }
+      ],
+      "C": [],
+      "info": {
+        "after": [],
+        "before": [
+          {
+            "grp": "g1",
+            "n": 2,
+            "sum": 340
+          }
+        ]
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "obligation": "unsafe_limit_before_row_guards",
+    "expected_safe": false,
+    "cases": 512,
+    "passed": 480,
+    "failed": 32,
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "APAC",
+          "email": "a@x",
+          "opted": 1,
+          "risk": 1,
+          "grp": "g1",
+          "val": 10
+        },
+        {
+          "aid": 2,
+          "tid": 1,
+          "region": "EU",
+          "email": "b@x",
+          "opted": 0,
+          "risk": 2,
+          "grp": "g1",
+          "val": 20
+        }
+      ],
+      "B": [
+        {
+          "bid": 10,
+          "tid": 1,
+          "aid": 1,
+          "amount": 120,
+          "purpose": "analytics"
+        },
+        {
+          "bid": 11,
+          "tid": 1,
+          "aid": 2,
+          "amount": 220,
+          "purpose": "analytics"
+        }
+      ],
+      "C": [],
+      "info": {
+        "reference": [
+          {
+            "aid": 2,
+            "bid": 11,
+            "amount": 220,
+            "email": "MASKED",
+            "grp": "g1"
+          }
+        ],
+        "limit_before_policy": [],
+        "raw_limited": [
+          {
+            "a_aid": 1,
+            "a_tid": 1,
+            "a_region": "APAC",
+            "a_email": "a@x",
+            "a_opted": 1,
+            "a_risk": 1,
+            "a_grp": "g1",
+            "a_val": 10,
+            "b_bid": 10,
+            "b_tid": 1,
+            "b_aid": 1,
+            "b_amount": 120,
+            "b_purpose": "analytics"
+          }
+        ]
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "obligation": "unsafe_acl_disjunction_removed",
+    "expected_safe": false,
+    "cases": 512,
+    "passed": 256,
+    "failed": 256,
+    "first_witness": {
+      "A": [
+        {
+          "aid": 2,
+          "tid": 1,
+          "region": "EU",
+          "email": "b@x",
+          "opted": 0,
+          "risk": 2,
+          "grp": "g1",
+          "val": 20
+        }
+      ],
+      "B": [],
+      "C": [],
+      "info": {
+        "reference": [
+          {
+            "aid": 2,
+            "tid": 1,
+            "region": "EU",
+            "email": "b@x",
+            "opted": 0,
+            "risk": 2,
+            "grp": "g1",
+            "val": 20
+          }
+        ],
+        "no_acl": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "obligation": "unsafe_projection_drops_policy_attrs",
+    "expected_safe": false,
+    "cases": 512,
+    "passed": 288,
+    "failed": 224,
+    "first_witness": {
+      "A": [
+        {
+          "aid": 1,
+          "tid": 1,
+          "region": "APAC",
+          "email": "a@x",
+          "opted": 1,
+          "risk": 1,
+          "grp": "g1",
+          "val": 10
+        }
+      ],
+      "B": [
+        {
+          "bid": 10,
+          "tid": 1,
+          "aid": 1,
+          "amount": 120,
+          "purpose": "analytics"
+        }
+      ],
+      "C": [],
+      "info": {
+        "reference": [],
+        "projected_late_filter": [
+          {
+            "aid": 1,
+            "bid": 10,
+            "amount": 120
+          }
+        ]
+      }
+    },
+    "status": "PASS"
+  }
+]

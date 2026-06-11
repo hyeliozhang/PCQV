@@ -1,0 +1,260 @@
+{
+  "status": "PASS",
+  "python_files": 31,
+  "total_lines": 6553,
+  "max_file_lines": 1803,
+  "max_function_lines": 177,
+  "max_function_complexity": 52,
+  "compile_failures": 0,
+  "cache_artifacts": 0,
+  "records": [
+    {
+      "file": "artifact/verify_final_claims.py",
+      "lines": 152,
+      "functions": 3,
+      "max_function_lines": 27,
+      "max_function_complexity": 12,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/sql_feature_semantics_checker.py",
+      "lines": 206,
+      "functions": 26,
+      "max_function_lines": 11,
+      "max_function_complexity": 9,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/run_standard_benchmarks.py",
+      "lines": 302,
+      "functions": 9,
+      "max_function_lines": 89,
+      "max_function_complexity": 17,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/exhaustive_semantics_checker.py",
+      "lines": 202,
+      "functions": 23,
+      "max_function_lines": 15,
+      "max_function_complexity": 11,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/randomized_semantic_fuzzer.py",
+      "lines": 191,
+      "functions": 4,
+      "max_function_lines": 68,
+      "max_function_complexity": 27,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/static_submission_audit.py",
+      "lines": 43,
+      "functions": 0,
+      "max_function_lines": 0,
+      "max_function_complexity": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/run_all_repro.py",
+      "lines": 29,
+      "functions": 1,
+      "max_function_lines": 20,
+      "max_function_complexity": 1,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/run_remaining.py",
+      "lines": 14,
+      "functions": 0,
+      "max_function_lines": 0,
+      "max_function_complexity": 0,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/optimizer_search_audit.py",
+      "lines": 176,
+      "functions": 10,
+      "max_function_lines": 30,
+      "max_function_complexity": 8,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/artifact_quality_audit.py",
+      "lines": 43,
+      "functions": 2,
+      "max_function_lines": 18,
+      "max_function_complexity": 13,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/make_figures.py",
+      "lines": 326,
+      "functions": 15,
+      "max_function_lines": 40,
+      "max_function_complexity": 16,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/run_joblike_benchmarks.py",
+      "lines": 259,
+      "functions": 10,
+      "max_function_lines": 37,
+      "max_function_complexity": 24,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/certificate_counterexample_audit.py",
+      "lines": 233,
+      "functions": 19,
+      "max_function_lines": 23,
+      "max_function_complexity": 11,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/capsule_minimality_audit.py",
+      "lines": 162,
+      "functions": 15,
+      "max_function_lines": 11,
+      "max_function_complexity": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/statistical_confidence_audit.py",
+      "lines": 79,
+      "functions": 2,
+      "max_function_lines": 8,
+      "max_function_complexity": 3,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/multiseed_semantic_regression.py",
+      "lines": 76,
+      "functions": 1,
+      "max_function_lines": 56,
+      "max_function_complexity": 16,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/portable_sql_plan_audit.py",
+      "lines": 94,
+      "functions": 2,
+      "max_function_lines": 63,
+      "max_function_complexity": 23,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/code_quality_audit.py",
+      "lines": 64,
+      "functions": 2,
+      "max_function_lines": 34,
+      "max_function_complexity": 19,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/proof_carrying_rewrite_suite.py",
+      "lines": 204,
+      "functions": 3,
+      "max_function_lines": 105,
+      "max_function_complexity": 10,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/manuscript_consistency_audit.py",
+      "lines": 222,
+      "functions": 5,
+      "max_function_lines": 177,
+      "max_function_complexity": 44,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/reviewer_round_audit.py",
+      "lines": 171,
+      "functions": 5,
+      "max_function_lines": 111,
+      "max_function_complexity": 42,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/clean_submission_audit.py",
+      "lines": 125,
+      "functions": 2,
+      "max_function_lines": 82,
+      "max_function_complexity": 49,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/format_claim_gate_audit.py",
+      "lines": 230,
+      "functions": 9,
+      "max_function_lines": 101,
+      "max_function_complexity": 33,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/submission_integrity_audit.py",
+      "lines": 162,
+      "functions": 1,
+      "max_function_lines": 2,
+      "max_function_complexity": 1,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/efficiency_scalability_audit.py",
+      "lines": 133,
+      "functions": 2,
+      "max_function_lines": 96,
+      "max_function_complexity": 23,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/memo_integration_audit.py",
+      "lines": 237,
+      "functions": 6,
+      "max_function_lines": 103,
+      "max_function_complexity": 31,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/review_readiness_audit.py",
+      "lines": 118,
+      "functions": 4,
+      "max_function_lines": 67,
+      "max_function_complexity": 35,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/expert_panel_audit.py",
+      "lines": 222,
+      "functions": 7,
+      "max_function_lines": 146,
+      "max_function_complexity": 52,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/figure_visual_audit.py",
+      "lines": 164,
+      "functions": 5,
+      "max_function_lines": 98,
+      "max_function_complexity": 37,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/pcqv/engine.py",
+      "lines": 1803,
+      "functions": 75,
+      "max_function_lines": 149,
+      "max_function_complexity": 48,
+      "status": "PASS"
+    },
+    {
+      "file": "artifact/tests/test_core_invariants.py",
+      "lines": 111,
+      "functions": 8,
+      "max_function_lines": 18,
+      "max_function_complexity": 6,
+      "status": "PASS"
+    }
+  ]
+}

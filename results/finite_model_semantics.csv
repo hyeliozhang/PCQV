@@ -1,0 +1,10 @@
+obligation,expected_safe,cases,passed,failed,status
+safe_selection_pushdown_over_guarded_relation,True,512,512,0,PASS
+safe_guarded_join_commutation,True,512,512,0,PASS
+safe_cross_guard_as_semijoin,True,512,512,0,PASS
+safe_inner_join_association_after_guards,True,512,512,0,PASS
+unsafe_mask_predicate_movement,False,512,384,128,PASS
+unsafe_aggregation_before_row_guards,False,512,432,80,PASS
+unsafe_limit_before_row_guards,False,512,480,32,PASS
+unsafe_acl_disjunction_removed,False,512,256,256,PASS
+unsafe_projection_drops_policy_attrs,False,512,288,224,PASS

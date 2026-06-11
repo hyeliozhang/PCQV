@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "problems": [],
+  "scale_measurements": 600,
+  "scales": [
+    0.03,
+    0.06,
+    0.12,
+    0.24,
+    0.48
+  ],
+  "medians_ms": {
+    "0.03": {
+      "pcqv": 0.59265,
+      "predicate_injection": 0.60005,
+      "oblivious_forced": 0.9201,
+      "view_barrier": 3.7798000000000003
+    },
+    "0.06": {
+      "pcqv": 0.55925,
+      "predicate_injection": 0.58805,
+      "oblivious_forced": 0.9161,
+      "view_barrier": 3.67695
+    },
+    "0.12": {
+      "pcqv": 0.7689,
+      "predicate_injection": 0.8404,
+      "oblivious_forced": 1.3721999999999999,
+      "view_barrier": 6.112100000000001
+    },
+    "0.24": {
+      "pcqv": 1.43735,
+      "predicate_injection": 1.71015,
+      "oblivious_forced": 2.9386,
+      "view_barrier": 12.674900000000001
+    },
+    "0.48": {
+      "pcqv": 2.3077,
+      "predicate_injection": 3.8291000000000004,
+      "oblivious_forced": 5.9635,
+      "view_barrier": 26.6781
+    }
+  },
+  "largest_scale": 0.48,
+  "largest_scale_metrics": {
+    "pcqv_ms": 2.3077,
+    "predicate_injection_ms": 3.8291000000000004,
+    "oblivious_forced_ms": 5.9635,
+    "view_barrier_ms": 26.6781,
+    "pcqv_speedup_vs_view_barrier": 11.560471465095116,
+    "predicate_injection_over_pcqv": 1.6592711357628809
+  },
+  "generated_numbers": "paper/generated_numbers.tex",
+  "csv": "results/scale_sensitivity.csv"
+}

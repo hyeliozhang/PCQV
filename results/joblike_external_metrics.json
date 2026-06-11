@@ -1,0 +1,17 @@
+{
+  "benchmark": "JOB/IMDB-style synthetic externality stress test",
+  "templates": 6,
+  "policy_levels": 4,
+  "timing_rows": 96,
+  "correctness_rows": 96,
+  "safe_equivalence": 96,
+  "safe_total": 96,
+  "median_latency_ms": {
+    "view_barrier": 4.1589,
+    "predicate_injection": 0.7293,
+    "oblivious_forced": 0.782,
+    "pcqv_job": 0.9388
+  },
+  "pcqv_speedup_vs_view_barrier": 4.43,
+  "pcqv_speedup_vs_oblivious_forced": 0.833
+}

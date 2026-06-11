@@ -1,0 +1,16 @@
+rule,condition,implemented
+R1 base guard introduction,attach every deterministic row guard to the protected base relation,yes
+R2 ordinary selection pushdown,selection predicate does not read a masked value and is deterministic,yes
+R3 join reordering,inner joins only; all guards remain attached or preserved as conjuncts,yes
+R4 cross-table guard reification,correlated EXISTS is preserved or replaced by equivalent joined attributes,yes
+R5 mask movement,mask only at observable projection; masked attributes not used for join/group/filter,yes
+R6 aggregate guard,group threshold applied after row guards and final grouping,yes
+R7 unsafe late aggregate,forbidden: aggregate unprotected rows before row guards,negative-control
+M1 no mask,forbidden: observable masked columns are returned raw,mutation-control
+M2 dropped tenant guard,forbidden: tenant isolation is deleted from base predicates,mutation-control
+M3 dropped purpose guard,forbidden: purpose or ticket-owner restrictions are deleted,mutation-control
+M4 dropped clearance/risk guard,forbidden: product clearance or customer risk guards are deleted,mutation-control
+M5 dropped region guard,forbidden: contextual regional visibility is deleted,mutation-control
+M6 dropped cross-table guard,forbidden: correlated membership guards are deleted,mutation-control
+M3 dropped ACL disjunction,forbidden: exception/region policy is deleted,mutation-control
+M4 missing group guard,forbidden: aggregate threshold is omitted,mutation-control
