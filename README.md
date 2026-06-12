@@ -41,6 +41,8 @@ docker run --rm pcqv-artifact
 
 The repository is CPU-only and uses Python 3.10+ with SQLite from the Python standard library. `matplotlib` is needed only for figure regeneration. No GPU, server DBMS, paid API, external model service, or network service is required for verification.
 
+PDF-layout audits use Poppler command-line tools such as `pdfinfo`, `pdftotext`, and `pdftoppm`. Put them on `PATH`, or set `PCQV_POPPLER_BIN` to the directory containing those binaries before running PDF gates.
+
 ## Expected Final Checks
 
 The final local package was checked before release with:

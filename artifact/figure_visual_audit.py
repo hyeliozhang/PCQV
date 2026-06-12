@@ -10,6 +10,7 @@ usage statement to a single language-editing sentence.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -22,7 +23,7 @@ RESULTS = ROOT / "results"
 PROBLEMS: list[str] = []
 DETAILS: dict[str, object] = {}
 EXPECTED = ["fig_performance_suite.pdf"]
-MIKTEX_BIN = Path(r"C:\Users\ASUS\AppData\Local\Programs\MiKTeX\miktex\bin\x64")
+EXTRA_BIN_DIRS = [Path(p) for p in os.environ.get("PCQV_POPPLER_BIN", "").split(os.pathsep) if p]
 
 
 def fail(msg: str) -> None:
@@ -33,8 +34,11 @@ def resolve_command(name: str) -> str:
     found = shutil.which(name)
     if found:
         return found
-    candidate = MIKTEX_BIN / f"{name}.exe"
-    return str(candidate) if candidate.exists() else name
+    for directory in EXTRA_BIN_DIRS:
+        candidate = directory / (f"{name}.exe" if os.name == "nt" else name)
+        if candidate.exists():
+            return str(candidate)
+    return name
 
 
 def run(args: list[str]) -> subprocess.CompletedProcess[str]:

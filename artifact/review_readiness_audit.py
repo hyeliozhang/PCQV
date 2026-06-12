@@ -8,6 +8,7 @@ not by prose alone.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -17,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / 'results'
 PAPER = ROOT / 'paper' / 'main.tex'
 PDF = ROOT / 'paper' / 'main.pdf'
-MIKTEX_BIN = Path(r"C:\Users\ASUS\AppData\Local\Programs\MiKTeX\miktex\bin\x64")
+EXTRA_BIN_DIRS = [Path(p) for p in os.environ.get("PCQV_POPPLER_BIN", "").split(os.pathsep) if p]
 PROBLEMS: list[str] = []
 
 
@@ -39,7 +40,15 @@ def load(rel: str) -> dict:
 
 def pdf_pages() -> int | None:
     try:
-        pdfinfo = shutil.which('pdfinfo') or str(MIKTEX_BIN / 'pdfinfo.exe')
+        pdfinfo = shutil.which('pdfinfo')
+        if not pdfinfo:
+            for directory in EXTRA_BIN_DIRS:
+                candidate = directory / ('pdfinfo.exe' if os.name == 'nt' else 'pdfinfo')
+                if candidate.exists():
+                    pdfinfo = str(candidate)
+                    break
+        if not pdfinfo:
+            pdfinfo = 'pdfinfo'
         cp = subprocess.run(
             [pdfinfo, str(PDF)],
             text=True,
