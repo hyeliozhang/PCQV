@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Audit reviewer-facing figure quality and AI-acknowledgment hygiene.
+"""Audit manuscript figure quality and required disclosure placement.
 
 This gate is intentionally visual-production oriented: it checks that manuscript
 figures are regenerated from code, included as vector PDF, use embedded fonts,
 use a polished two-column panel layout plus high-resolution PNG previews for
-manual inspection, avoid Matplotlib's default blue-only style, and keep the AI
-usage statement to a single language-editing sentence.
+manual inspection, avoid Matplotlib's default blue-only style, and keep the
+required disclosure concise.
 """
 from __future__ import annotations
 
@@ -158,15 +158,15 @@ def main() -> None:
         re.S,
     )
     if not ack_match:
-        fail("missing AI-generated content acknowledgement")
+        fail("missing required disclosure section")
     else:
         ack = " ".join(ack_match.group(1).split())
-        DETAILS["ai_acknowledgement"] = ack
+        DETAILS["disclosure_text"] = ack
         sentence_count = len([x for x in re.split(r"(?<=[.!?])\s+", ack) if x])
         if sentence_count != 1:
-            fail(f"AI acknowledgement should be one concise sentence, found {sentence_count}")
+            fail(f"required disclosure should be one concise sentence, found {sentence_count}")
         if "AI was used only for language and grammar polishing." != ack:
-            fail("AI acknowledgement should be the concise user-approved language/grammar polishing disclosure")
+            fail("required disclosure should match the language/grammar polishing statement")
 
     # Avoid common machine-generated promotional phrasing in the body.
     body = re.split(r"\\section\*\{(?:AI-Generated Content Acknowledgement|Guidelines for Artificial Intelligence \(AI\)-Generated Content)\}", tex, maxsplit=1)[0]

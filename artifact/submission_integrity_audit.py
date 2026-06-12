@@ -41,11 +41,11 @@ required = [
     "artifact/certificate_counterexample_audit.py", "artifact/proof_carrying_rewrite_suite.py", "artifact/manuscript_consistency_audit.py",
     "artifact/exhaustive_semantics_checker.py", "artifact/sql_feature_semantics_checker.py",
     "artifact/randomized_semantic_fuzzer.py", "artifact/optimizer_search_audit.py", "artifact/run_joblike_benchmarks.py",
-    "artifact/static_submission_audit.py", "artifact/artifact_quality_audit.py", "artifact/reviewer_round_audit.py", "artifact/format_claim_gate_audit.py", "artifact/figure_visual_audit.py", "artifact/clean_submission_audit.py", "artifact/memo_integration_audit.py", "artifact/review_readiness_audit.py", "artifact/expert_panel_audit.py", "artifact/verify_final_claims.py",
+    "artifact/static_submission_audit.py", "artifact/artifact_quality_audit.py", "artifact/manuscript_package_audit.py", "artifact/format_claim_gate_audit.py", "artifact/figure_visual_audit.py", "artifact/clean_submission_audit.py", "artifact/memo_integration_audit.py", "artifact/evidence_completeness_audit.py", "artifact/claim_boundary_audit.py", "artifact/verify_final_claims.py",
     "artifact/tests/test_core_invariants.py", "results/metrics.json", "results/standard_external_metrics.json",
     "results/finite_model_semantics.json", "results/sql_feature_semantics.json", "results/randomized_semantic_fuzz.json",
     "results/optimizer_search_audit.json", "results/joblike_external_metrics.json",
-    "results/certificate_counterexample_audit.json", "results/proof_carrying_rewrite_suite.json", "results/manuscript_consistency_audit.json", "results/reviewer_round_audit.json", "results/format_claim_gate_audit.json", "results/figure_visual_audit.json", "results/clean_submission_audit.json", "results/memo_integration_audit.json", "results/review_readiness_audit.json", "results/expert_panel_audit.json", "results/code_quality_audit.json", "EVIDENCE.md", "STATUS.md", "FORMAT_CHECK.md",
+    "results/certificate_counterexample_audit.json", "results/proof_carrying_rewrite_suite.json", "results/manuscript_consistency_audit.json", "results/manuscript_package_audit.json", "results/format_claim_gate_audit.json", "results/figure_visual_audit.json", "results/clean_submission_audit.json", "results/memo_integration_audit.json", "results/evidence_completeness_audit.json", "results/claim_boundary_audit.json", "results/code_quality_audit.json", "EVIDENCE.md", "STATUS.md", "FORMAT_CHECK.md",
     "SUPPLEMENTAL_SUBMISSION.md", "SCOPE_GUARD.md", "REPRODUCIBILITY.md", "requirements.txt", "Dockerfile",
 ]
 for rel in required:
@@ -124,21 +124,21 @@ except Exception as e:
     fail(f"failed to check format/claim gate audit: {e}")
 
 
-# Clean final package gate should pass: no stale round logs/reports/renders and a consistent evidence ledger.
+# Clean package gate should pass: no stale logs/reports/renders and a consistent evidence ledger.
 try:
     clean = json.loads((ROOT / "results" / "clean_submission_audit.json").read_text())
     if clean.get("status") != "PASS" or clean.get("problem_count"):
-        fail("clean final package audit did not pass")
+        fail("clean package audit did not pass")
 except Exception as e:
-    fail(f"failed to check clean final package audit: {e}")
+    fail(f"failed to check clean package audit: {e}")
 
-# Reviewer-round coherence/PDF audit should pass as a second independent gate.
+# Manuscript/package coherence audit should pass as a second independent gate.
 try:
-    reviewer = json.loads((ROOT / "results" / "reviewer_round_audit.json").read_text())
-    if reviewer.get("status") != "PASS" or reviewer.get("problem_count"):
-        fail("reviewer-round audit did not pass")
+    package = json.loads((ROOT / "results" / "manuscript_package_audit.json").read_text())
+    if package.get("status") != "PASS" or package.get("problem_count"):
+        fail("manuscript/package audit did not pass")
 except Exception as e:
-    fail(f"failed to check reviewer-round audit: {e}")
+    fail(f"failed to check manuscript/package audit: {e}")
 
 # Compile Python files without executing them.
 import py_compile

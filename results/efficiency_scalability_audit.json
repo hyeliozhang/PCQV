@@ -50,6 +50,6 @@
     "pcqv_speedup_vs_view_barrier": 11.560471465095116,
     "predicate_injection_over_pcqv": 1.6592711357628809
   },
-  "generated_numbers": "paper/generated_numbers.tex",
-  "csv": "results/scale_sensitivity.csv"
+  "generated_numbers": "paper\\generated_numbers.tex",
+  "csv": "results\\scale_sensitivity.csv"
 }

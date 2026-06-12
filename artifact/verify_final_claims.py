@@ -44,15 +44,16 @@ def run_local_audit(script_name):
         raise SystemExit(f'local audit failed: {script_name}')
 
 run_local_audit('code_quality_audit.py')
+run_local_audit('artifact_quality_audit.py')
 run_local_audit('manuscript_consistency_audit.py')
 run_local_audit('format_claim_gate_audit.py')
 run_local_audit('figure_visual_audit.py')
 run_local_audit('efficiency_scalability_audit.py')
 run_local_audit('memo_integration_audit.py')
 run_local_audit('clean_submission_audit.py')
-run_local_audit('review_readiness_audit.py')
-run_local_audit('expert_panel_audit.py')
-run_local_audit('reviewer_round_audit.py')
+run_local_audit('evidence_completeness_audit.py')
+run_local_audit('claim_boundary_audit.py')
+run_local_audit('manuscript_package_audit.py')
 run_local_audit('submission_integrity_audit.py')
 
 def load_obligations(json_name, csv_name):
@@ -90,14 +91,14 @@ portable=load('portable_sql_plan_audit.json')
 codeq=load('code_quality_audit.json')
 proofcert=load('proof_carrying_rewrite_suite.json')
 manuscript=load('manuscript_consistency_audit.json')
-reviewer=load('reviewer_round_audit.json')
+package=load('manuscript_package_audit.json')
 bestgate=load('format_claim_gate_audit.json')
 figurevis=load('figure_visual_audit.json')
 clean=load('clean_submission_audit.json')
 effscale=load('efficiency_scalability_audit.json')
 memo=load('memo_integration_audit.json')
-readiness=load('review_readiness_audit.json')
-expertpanel=load('expert_panel_audit.json')
+evidence=load('evidence_completeness_audit.json')
+claims=load('claim_boundary_audit.json')
 
 checks=[]
 checks += [
@@ -134,19 +135,19 @@ checks += [
  ('portable sql and plan audit', portable.get('status')=='PASS' and portable.get('generated_safe_sql',0)>=6000 and portable.get('failures')==0),
  ('source code quality audit', codeq.get('status')=='PASS' and codeq.get('python_files',0)>=20 and codeq.get('compile_failures')==0 and codeq.get('cache_artifacts')==0),
  ('proof-carrying rewrite suite', proofcert.get('status')=='PASS' and proofcert.get('safe_certificates_accepted')==proofcert.get('safe_certificates_total')==1064 and proofcert.get('unsafe_candidates_rejected',0)>=400 and proofcert.get('mandatory_obligations_covered')==proofcert.get('mandatory_obligations_total')),
- ('reviewer-round manuscript/PDF audit', reviewer.get('status')=='PASS' and reviewer.get('problem_count')==0 and reviewer.get('pdf_pages')==14),
- ('figure visual and AI-acknowledgement audit', figurevis.get('status')=='PASS' and figurevis.get('problem_count')==0),
+ ('manuscript/package audit', package.get('status')=='PASS' and package.get('problem_count')==0 and package.get('pdf_pages')==14),
+ ('figure visual and disclosure audit', figurevis.get('status')=='PASS' and figurevis.get('problem_count')==0),
  ('format/claim gate audit', bestgate.get('status')=='PASS' and bestgate.get('problem_count')==0 and bestgate.get('details',{}).get('body_section_count',99)<=8 and bestgate.get('details',{}).get('page12_fill',{}).get('right_blank_inches',99)<=1.35),
- ('clean final submission package audit', clean.get('status')=='PASS' and clean.get('problem_count')==0),
+ ('clean artifact package audit', clean.get('status')=='PASS' and clean.get('problem_count')==0),
  ('manuscript table/figure consistency audit', manuscript.get('status')=='PASS' and not manuscript.get('problems')),
  ('efficiency and scalability audit', effscale.get('status')=='PASS' and effscale.get('scale_measurements',0)>=600 and effscale.get('largest_scale_metrics',{}).get('pcqv_speedup_vs_view_barrier',0)>10.0),
  ('memo integration bridge audit', memo.get('status')=='PASS' and memo.get('memo_candidate_records',0)>=6000 and memo.get('alias_property_records',0)>=15000),
- ('review readiness audit', readiness.get('status')=='PASS' and readiness.get('all_dimensions_high_confidence') and readiness.get('mean_panel_score',0)>=9.0),
- ('strict expert panel audit', expertpanel.get('status')=='PASS' and expertpanel.get('all_scores_at_or_above_9') and expertpanel.get('all_confidence_high') and expertpanel.get('mean_panel_score',0)>=9.1),
+ ('evidence completeness audit', evidence.get('status')=='PASS' and evidence.get('all_checks_supported')),
+ ('claim boundary audit', claims.get('status')=='PASS' and claims.get('all_checks_supported')),
 ]
 failed=[name for name, ok in checks if not ok]
 for name, ok in checks:
     print(f"{name}: {'PASS' if ok else 'FAIL'}")
 if failed:
     print('FAILED:', ', '.join(failed)); sys.exit(1)
-print('all manuscript/PDF consistency, format/claim gate, reviewer-round coherence, efficiency/scalability, memo-integration, review-readiness, artifact, proof-carrying rewrite, multi-seed, portability, code-quality, minimality, confidence, certificate, externality, and packaging claims verified')
+print('all manuscript/PDF consistency, format/claim gate, manuscript/package coherence, efficiency/scalability, memo-integration, evidence-completeness, artifact, proof-carrying rewrite, multi-seed, portability, code-quality, minimality, confidence, certificate, externality, and packaging claims verified')

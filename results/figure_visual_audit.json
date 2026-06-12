@@ -6,7 +6,7 @@
     "figure_includes": [
       "fig_performance_suite.pdf"
     ],
-    "ai_acknowledgement": "AI was used only for language and grammar polishing.",
+    "disclosure_text": "AI was used only for language and grammar polishing.",
     "figures": {
       "fig_performance_suite.pdf": {
         "pdfinfo": {

@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Reviewer-round audit for manuscript coherence, claims, and PDF layout.
-
-This gate is intentionally independent of the numerical benchmark verifier.  It
-checks issues that senior reviewers and area chairs often catch only after a
-full read: RQ drift, theorem-scope overclaiming, unsafe baseline labeling,
-paired-vs-global speedup ambiguity, missing evidence files, appendix/page-limit
-risk, and stale code-quality macros.
-"""
+"""Audit manuscript coherence, claim wording, evidence files, and PDF layout."""
 from __future__ import annotations
 
 import json
@@ -35,7 +28,7 @@ def load_json(rel: str) -> dict:
         return {}
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:  # pragma: no cover - defensive audit code
+    except Exception as exc:
         fail(f"cannot parse {rel}: {exc}")
         return {}
 
@@ -72,34 +65,35 @@ def command_text(cmd: list[str]) -> str:
 
 
 def pdf_pages() -> int | None:
-    out = command_text(["pdfinfo", str(PDF)])
-    m = re.search(r"^Pages:\s+(\d+)", out, flags=re.MULTILINE)
-    return int(m.group(1)) if m else None
+    match = re.search(r"^Pages:\s+(\d+)", command_text(["pdfinfo", str(PDF)]), flags=re.MULTILINE)
+    return int(match.group(1)) if match else None
 
 
 def main() -> None:
     tex = PAPER.read_text(encoding="utf-8")
-    body = re.split(r"\\section\*\{(?:AI-Generated Content Acknowledgement|Guidelines for Artificial Intelligence \(AI\)-Generated Content)\}", tex, maxsplit=1)[0]
+    body = re.split(
+        r"\\section\*\{(?:AI-Generated Content Acknowledgement|Guidelines for Artificial Intelligence \(AI\)-Generated Content)\}",
+        tex,
+        maxsplit=1,
+    )[0]
 
-    # Submission-layout checks.
     pages = pdf_pages()
     if pages != 14:
-        fail(f"expected 14 total PDF pages after 12-page body + ack/references, found {pages}")
+        fail(f"expected 14 total PDF pages after 12-page body plus disclosure/references, found {pages}")
     if "\\appendix" in tex.lower() or "Appendix" in body:
-        fail("appendix marker appears in main body")
+        fail("appendix marker appears in the main body")
     if (
         "\\clearpage\n\n\\section*{AI-Generated Content Acknowledgement}" not in tex
         and "\\clearpage\n\n\\section*{Guidelines for Artificial Intelligence (AI)-Generated Content}" not in tex
     ):
-        fail("AI-generated content acknowledgement does not start after an explicit clear page")
+        fail("required disclosure does not start after an explicit clear page")
     if "\\bibliography{references}" not in tex:
         fail("bibliography call missing")
 
-    # Reviewer coherence checks.
     checks = {
         "five RQs": "The evaluation asks five questions.",
         "SPJAG theorem scope": "core soundness theorem is deliberately stated for the analytical SPJAG fragment",
-        "audit-surface caveat": "audit surface", 
+        "audit-surface caveat": "audit surface",
         "unsafe no-policy label": "No policy & diagnostic",
         "unsafe aggregate label": "Unsafe aggregate & unsafe diag.",
         "diagnostic ablation caveat": "not presented as deployed methods",
@@ -109,7 +103,7 @@ def main() -> None:
     }
     for name, needle in checks.items():
         if needle not in tex:
-            fail(f"missing reviewer-coherence text: {name}")
+            fail(f"missing manuscript consistency text: {name}")
     if "RQ6:" in tex:
         fail("stale RQ6 text remains")
     if re.search(r"\bsmallest\b", body, flags=re.IGNORECASE):
@@ -119,7 +113,6 @@ def main() -> None:
     if "Mask push & mask deterministic" in tex:
         fail("stale oversimplified mask-push rule remains")
 
-    # Result and macro consistency beyond table-level checks.
     metrics = load_json("results/metrics.json")
     stat = load_json("results/statistical_confidence_audit.json")
     codeq = load_json("results/code_quality_audit.json")
@@ -138,7 +131,6 @@ def main() -> None:
         lo = job.get("ci_low")
         hi = job.get("ci_high")
         if med is not None:
-            nums = (ROOT / "paper" / "generated_numbers.tex").read_text(encoding="utf-8")
             if f"\\newcommand{{\\JobPairedSpeedView}}{{{float(med):.3f}}}" not in nums:
                 fail("JobPairedSpeedView macro is stale")
             if "\\JobPairedSpeedView{}$\\times$" not in tex:
@@ -154,43 +146,40 @@ def main() -> None:
         if f"\\newcommand{{\\CodeAuditTotalLines}}{{{total_lines}}}" not in nums:
             fail("CodeAuditTotalLines macro is stale")
 
-    # Evidence ledger should point to files that actually exist.
     evidence = (ROOT / "EVIDENCE.md").read_text(encoding="utf-8") if (ROOT / "EVIDENCE.md").exists() else ""
     for rel in re.findall(r"`([^`]+)`", evidence):
-        # Ignore globs and directories; check concrete paths only.
+        if "\n" in rel:
+            continue
         if "*" in rel or rel.endswith("/") or rel.startswith("python "):
             continue
-        if "," in rel:
-            for part in [x.strip() for x in rel.split(",")]:
-                if part and not (ROOT / part).exists():
-                    fail(f"evidence ledger path missing: {part}")
-        elif not (ROOT / rel).exists():
-            fail(f"evidence ledger path missing: {rel}")
+        for part in [x.strip() for x in rel.split(",") if x.strip()]:
+            if not (ROOT / part).exists():
+                fail(f"evidence ledger path missing: {part}")
 
-    # Bibliography hygiene.
     bib = (ROOT / "paper" / "references.bib").read_text(encoding="utf-8")
     keys = re.findall(r"@\w+\s*\{\s*([^,]+)", bib)
-    cited = []
+    cited: list[str] = []
     for group in re.findall(r"\\cite\w*\s*\{([^}]+)\}", tex):
         cited.extend(k.strip() for k in group.split(",") if k.strip())
     if len(set(cited)) < 70:
         fail(f"fewer than 70 cited references: {len(set(cited))}")
-    if sorted(set(cited) - set(keys)):
-        fail(f"citations missing from BibTeX: {sorted(set(cited) - set(keys))[:5]}")
+    missing = sorted(set(cited) - set(keys))
+    if missing:
+        fail(f"citations missing from BibTeX: {missing[:5]}")
 
-    status = "PASS" if not PROBLEMS else "FAIL"
     out = {
-        "status": status,
+        "status": "PASS" if not PROBLEMS else "FAIL",
         "problem_count": len(PROBLEMS),
         "problems": PROBLEMS,
         "pdf_pages": pages,
         "cited_references": len(set(cited)),
         "bib_entries": len(keys),
     }
-    (RESULTS / "reviewer_round_audit.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    RESULTS.mkdir(exist_ok=True)
+    (RESULTS / "manuscript_package_audit.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
     print(json.dumps(out, indent=2))
     if PROBLEMS:
-        raise SystemExit("reviewer-round audit failed")
+        raise SystemExit("manuscript/package audit failed")
 
 
 if __name__ == "__main__":

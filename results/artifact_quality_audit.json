@@ -27,8 +27,16 @@
       "pass_nodes": 0
     },
     {
+      "file": "artifact\\claim_boundary_audit.py",
+      "lines": 189,
+      "functions": 7,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
       "file": "artifact\\clean_submission_audit.py",
-      "lines": 126,
+      "lines": 123,
       "functions": 2,
       "classes": 0,
       "todos": 0,
@@ -51,6 +59,14 @@
       "pass_nodes": 0
     },
     {
+      "file": "artifact\\evidence_completeness_audit.py",
+      "lines": 151,
+      "functions": 5,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
       "file": "artifact\\exhaustive_semantics_checker.py",
       "lines": 203,
       "functions": 23,
@@ -59,16 +75,8 @@
       "pass_nodes": 0
     },
     {
-      "file": "artifact\\expert_panel_audit.py",
-      "lines": 242,
-      "functions": 8,
-      "classes": 0,
-      "todos": 0,
-      "pass_nodes": 0
-    },
-    {
       "file": "artifact\\figure_visual_audit.py",
-      "lines": 185,
+      "lines": 189,
       "functions": 6,
       "classes": 0,
       "todos": 0,
@@ -76,7 +84,7 @@
     },
     {
       "file": "artifact\\format_claim_gate_audit.py",
-      "lines": 244,
+      "lines": 248,
       "functions": 10,
       "classes": 0,
       "todos": 0,
@@ -94,6 +102,14 @@
       "file": "artifact\\manuscript_consistency_audit.py",
       "lines": 223,
       "functions": 5,
+      "classes": 0,
+      "todos": 0,
+      "pass_nodes": 0
+    },
+    {
+      "file": "artifact\\manuscript_package_audit.py",
+      "lines": 187,
+      "functions": 6,
       "classes": 0,
       "todos": 0,
       "pass_nodes": 0
@@ -141,22 +157,6 @@
     {
       "file": "artifact\\randomized_semantic_fuzzer.py",
       "lines": 192,
-      "functions": 4,
-      "classes": 0,
-      "todos": 0,
-      "pass_nodes": 0
-    },
-    {
-      "file": "artifact\\reviewer_round_audit.py",
-      "lines": 194,
-      "functions": 6,
-      "classes": 0,
-      "todos": 0,
-      "pass_nodes": 0
-    },
-    {
-      "file": "artifact\\review_readiness_audit.py",
-      "lines": 129,
       "functions": 4,
       "classes": 0,
       "todos": 0,
@@ -228,7 +228,7 @@
     },
     {
       "file": "artifact\\verify_final_claims.py",
-      "lines": 153,
+      "lines": 154,
       "functions": 3,
       "classes": 0,
       "todos": 0,
